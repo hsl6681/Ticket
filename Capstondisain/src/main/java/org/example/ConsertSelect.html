@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>콘서트 선택</title>
+    <style>
+        /* 스타일링을 위한 CSS 코드를 추가합니다. */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .concert-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .concert-group {
+            width: 33.33%;
+        }
+        .concert {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+        }
+        .concert img {
+            max-width: 100%;
+        }
+        .info-popup {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            padding: 5px;
+            border: 1px solid #ccc;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        #user-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>콘서트 선택</h1>
+<div id="concert-list" class="concert-container">
+    <!-- 콘서트 목록은 JavaScript로 동적으로 추가됩니다. -->
+</div>
+
+<div id="user-buttons">
+    <button onclick="login()">로그인</button>
+    <button onclick="signup()">회원가입</button>
+</div>
+
+<script>
+    // 콘서트 데이터 (예시)
+    const concerts = [
+        { id: 1, name: '콘서트 1', image: '123.jpg', info: '안녕하세요' },
+        { id: 2, name: '콘서트 2', image: '콘서트 이미지', info: '안녕하세요' },
+        { id: 3, name: '콘서트 3', image: '콘서트 이미지', info: '안녕하세요' },
+        { id: 4, name: '콘서트 4', image: '콘서트 이미지', info: '안녕하세요' },
+        { id: 5, name: '콘서트 5', image: '콘서트 이미지', info: '안녕하세요' },
+        { id: 6, name: '콘서트 6', image: '콘서트 이미지', info: '안녕하세요' },
+        { id: 7, name: '콘서트 7', image: '콘서트 이미지', info: '안녕하세요' },
+        { id: 8, name: '콘서트 8', image: '콘서트 이미지', info: '안녕하세요' },
+        { id: 9, name: '콘서트 9', image: '콘서트 이미지', info: '안녕하세요' }
+    ];
+
+    function displayConcerts() {
+        const concertList = document.getElementById('concert-list');
+
+        concerts.forEach((concert, index) => {
+            const concertElement = document.createElement('div');
+            concertElement.classList.add('concert');
+
+            // 콘서트 이미지 추가
+            concertElement.innerHTML = `
+                <img src="${concert.image}" alt="${concert.name}">
+                <p>${concert.name}</p>
+            `;
+
+            // 콘서트 정보를 마우스로 이벤트를 표시 합니다.
+            const infoPopup = document.createElement('div');
+            infoPopup.classList.add('info-popup');
+            infoPopup.textContent = concert.info;
+            concertElement.appendChild(infoPopup);
+
+            concertElement.addEventListener('mouseover', () => {
+                infoPopup.style.display = 'block';
+            });
+
+            concertElement.addEventListener('mouseout', () => {
+                infoPopup.style.display = 'none';
+            });
+
+            // 콘서트 선택 이벤트
+            concertElement.addEventListener('click', () => {
+                // 선택한 콘서트 처리
+                console.log(`선택한 콘서트: ${concert.name}`);
+            });
+
+            // 3개씩 묶어서 정렬
+            const groupIndex = Math.floor(index / 3);
+            let concertGroup = concertList.querySelector(`.concert-group[data-group="${groupIndex}"]`);
+            if (!concertGroup) {
+                concertGroup = document.createElement('div');
+                concertGroup.classList.add('concert-group');
+                concertGroup.setAttribute('data-group', groupIndex);
+                concertList.appendChild(concertGroup);
+            }
+
+            concertGroup.appendChild(concertElement);
+        });
+    }
+
+    // 로그인 버튼 클릭 시 호출되는 함수
+    function login() {
+        // 로그인 처리를 수행
+        console.log('로그인 버튼 클릭');
+    }
+
+    // 회원가입 버튼 클릭 시 호출되는 함수
+    function signup() {
+        // 회원가입 처리를 수행
+        console.log('회원가입 버튼 클릭');
+    }
+
+    // 페이지 로드 시 콘서트 목록을 화면에 표시
+    window.onload = function () {
+        displayConcerts();
+    };
+</script>
+</body>
+</html>

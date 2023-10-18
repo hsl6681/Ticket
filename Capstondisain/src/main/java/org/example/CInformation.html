@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>콘서트 정보</title>
+    <style>
+        /* 스타일링을 위한 CSS 코드를 추가합니다. */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+        }
+        .screen {
+            flex: 1;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        .concert-poster {
+            max-width: 100%;
+            height: auto;
+        }
+        .concert-description, .date-selection {
+            margin: 30px 10px;
+        }
+        .date-button, .book-button, .login-button, .signup-button {
+            display: block;
+            margin: 5px 0;
+            padding: 5px 10px;
+            background-color: #00aaff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .user-panel {
+            text-align: right;
+            max-width: 200px;
+            padding: 10px;
+        }
+        .login-button, .signup-button {
+            padding: 5px 10px;
+            background-color: #00aaff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="screen">
+    <h2>콘서트 포스터 제목</h2>
+    <img src="concert_poster.jpg" alt="콘서트 포스터" class="concert-poster">
+</div>
+<div class="screen">
+
+    <p class="concert-description">장소   올림픽공원 KSPO DOME</p>
+    <p class="concert-description">공연기간     </p>
+    <p class="concert-description">관람연령     </p>
+    <p class="concert-description">가격         </p>
+</div>
+<div class="screen">
+    <div class="date-selection">
+        <h3>콘서트 일정</h3>
+        <textarea id="date-input" placeholder="콘서트 일정을 선택하세요"></textarea>
+        <button class="date-button" id="date-button1">일정 1 선택</button>
+        <button class="date-button" id="date-button2">일정 2 선택</button>
+        <button class="date-button" id="date-button3">일정 3 선택</button>
+        <button class="book-button">좌석 선택</button>
+    </div>
+</div>
+<div class="user-panel">
+    <button class="login-button">로그인</button>
+    <button class="signup-button">회원가입</button>
+</div>
+<script>
+    const dateInput = document.getElementById('date-input');
+    const dateButtons = document.querySelectorAll('.date-button');
+
+    dateButtons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+            dateInput.value = `일정 ${index + 1} 선택됨`;
+        });
+    });
+</script>
+</body>
+</html>

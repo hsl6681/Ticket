@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>좌석 선택</title>
+    <style>
+        /* 스타일링을 위한 CSS 코드를 추가합니다. */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: space-between;
+        }
+        .seat-map {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 500px; /* 가로로 10개씩 배열하기 위한 너비 설정 */
+            margin: 0 auto;
+        }
+        .seat {
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            background-color: #ccc;
+            cursor: pointer;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+        }
+        .seat.selected {
+            background-color: #00aaff;
+            color: white;
+        }
+        .selection-panel {
+            max-width: 200px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .user-panel {
+            text-align: right;
+            max-width: 200px;
+            padding: 10px;
+        }
+        .login-button, .signup-button {
+            padding: 5px 10px;
+            background-color: #00aaff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="selection-panel">
+    <h2>선택된 좌석</h2>
+    <ul id="selected-seats"></ul>
+    <button id="checkout-button">결제하기</button>
+</div>
+
+<div id="seat-map" class="seat-map">
+    <!-- 좌석 목록은 JavaScript로 동적으로 추가됩니다. -->
+</div>
+
+<script>
+    // 좌석 데이터 (10개씩 총 70개)
+    const seats = [];
+    const rows = 'ABCDEFG';
+    for (let row = 0; row < rows.length; row++) {
+        for (let seatNum = 1; seatNum <= 10; seatNum++) {
+            const seatId = `${rows[row]}${seatNum}`;
+            seats.push({ id: seatId });
+        }
+    }
+
+    // 선택한 좌석을 저장하는 배열
+    const selectedSeats = [];
+
+    // 좌석 선택 및 해제를 처리하는 함수
+    function toggleSeatSelection(seatId) {
+        const seat = document.getElementById(seatId);
+
+        if (seat.classList.contains('selected')) {
+            seat.classList.remove('selected');
+            // 선택한 좌석 목록에서 제거
+            const index = selectedSeats.indexOf(seatId);
+            if (index > -1) {
+                selectedSeats.splice(index, 1);
+            }
+        } else {
+            // 최대 두 개까지 선택 가능
+            if (selectedSeats.length < 2) {
+                seat.classList.add('selected');
+                selectedSeats.push(seatId);
+            }
+        }
+
+        updateSelectedSeatText();
+    }
+
+    // 선택된 좌석 목록을 업데이트하는 함수
+    function updateSelectedSeatText() {
+        const selectedSeatsList = document.getElementById('selected-seats');
+        selectedSeatsList.innerHTML = '';
+
+        selectedSeats.forEach(seatNumber => {
+            const listItem = document.createElement('li');
+            listItem.textContent = seatNumber;
+            selectedSeatsList.appendChild(listItem);
+        });
+    }
+
+    // 좌석 목록을 화면에 표시하는 함수
+    function displaySeats() {
+        const seatMap = document.getElementById('seat-map');
+
+        seats.forEach(seat => {
+            const seatElement = document.createElement('div');
+            seatElement.classList.add('seat');
+            seatElement.textContent = seat.id;
+            seatElement.id = seat.id;
+
+            // 좌석 클릭 이벤트를 추가합니다.
+            seatElement.addEventListener('click', () => {
+                toggleSeatSelection(seat.id);
+            });
+
+            seatMap.appendChild(seatElement);
+        });
+    }
+
+    // 페이지 로드 시 좌석 목록을 화면에 표시합니다.
+    window.onload = function () {
+        displaySeats();
+    };
+
+    // 결제 버튼 클릭 시의 처리를 추가합니다.
+    document.getElementById('checkout-button').addEventListener('click', () => {
+        if (selectedSeats.length > 0) {
+            alert(`선택한 좌석: ${selectedSeats.join(', ')}`);
+        } else {
+            alert('좌석을 선택해주세요.');
+        }
+    });
+</script>
+</body>
+</html>
