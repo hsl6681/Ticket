@@ -34,17 +34,10 @@
             border: none;
             cursor: pointer;
         }
-        .user-panel {
-            text-align: right;
-            max-width: 200px;
-            padding: 10px;
-        }
-        .login-button, .signup-button {
-            padding: 5px 10px;
-            background-color: #00aaff;
-            color: white;
-            border: none;
-            cursor: pointer;
+        #user-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
         }
     </style>
 </head>
@@ -54,8 +47,9 @@
     <img src="concert_poster.jpg" alt="콘서트 포스터" class="concert-poster">
 </div>
 <div class="screen">
-
-    <p class="concert-description">장소   올림픽공원 KSPO DOME</p>
+    <h2>포스터 정보<br>
+    </h2>
+    <p class="concert-description">장소   올림픽공원 KSPO DOME<br></p>
     <p class="concert-description">공연기간     </p>
     <p class="concert-description">관람연령     </p>
     <p class="concert-description">가격         </p>
@@ -67,12 +61,12 @@
         <button class="date-button" id="date-button1">일정 1 선택</button>
         <button class="date-button" id="date-button2">일정 2 선택</button>
         <button class="date-button" id="date-button3">일정 3 선택</button>
-        <button class="book-button">좌석 선택</button>
+        <button class="book-button" onclick="redirectToSeatSelection()">좌석 선택</button>
     </div>
 </div>
-<div class="user-panel">
-    <button class="login-button">로그인</button>
-    <button class="signup-button">회원가입</button>
+<div id="user-buttons">
+    <button onclick="login()">로그인</button>
+    <button onclick="signup()">회원가입</button>
 </div>
 <script>
     const dateInput = document.getElementById('date-input');
@@ -83,6 +77,12 @@
             dateInput.value = `일정 ${index + 1} 선택됨`;
         });
     });
+
+    function redirectToSeatSelection() {
+        // 다른 HTML 파일로 이동
+        window.location.href = 'CSeatSelect.html';
+    }
+
 </script>
 </body>
 </html>

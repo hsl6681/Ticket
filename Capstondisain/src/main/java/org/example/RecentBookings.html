@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>최근 예매 내역</title>
+    <style>
+        /* 스타일링을 위한 CSS 코드를 추가합니다. */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>나의 최근 예매 내역</h1>
+    </div>
+    <table>
+        <tr>
+            <th>예매일</th>
+            <th>예약 번호</th>
+            <th>공연명</th>
+            <th>관람일</th>
+            <th>좌석 번호</th>
+        </tr>
+        <!-- 예매 내역은 여기에 동적으로 추가됩니다. -->
+    </table>
+</div>
+
+<script>
+    // 서버에서 최근 예매 내역을 가져오는 코드 (AJAX 또는 fetch 사용)
+    // 예매 내역 데이터는 bookings 변수에 할당합니다.
+    const bookings = [
+        { date: '2023-09-01', reservationNumber: '12345', event: '콘서트 A', showDate: '2023-09-10', seatNumber: 'A1' },
+        { date: '2023-09-10', reservationNumber: '54321', event: '콘서트 B', showDate: '2023-09-20', seatNumber: 'B2' },
+        { date: '2023-09-20', reservationNumber: '98765', event: '콘서트 C', showDate: '2023-09-30', seatNumber: 'C3' },
+    ];
+
+    const table = document.querySelector('table');
+
+    // 최근 예매 내역을 표에 추가
+    bookings.forEach((booking) => {
+        const row = table.insertRow(-1);
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+        const cell3 = row.insertCell(2);
+        const cell4 = row.insertCell(3);
+        const cell5 = row.insertCell(4);
+
+        cell1.innerHTML = booking.date;
+        cell2.innerHTML = booking.reservationNumber;
+        cell3.innerHTML = booking.event;
+        cell4.innerHTML = booking.showDate;
+        cell5.innerHTML = booking.seatNumber;
+    });
+</script>
+</body>
+</html>

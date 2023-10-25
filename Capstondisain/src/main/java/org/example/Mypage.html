@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>마이 페이지</title>
+    <style>
+        /* 스타일링을 위한 CSS 코드를 추가합니다. */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .profile {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .profile img {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 50%;
+        }
+        .profile h3 {
+            margin: 10px 0;
+        }
+        .button {
+            background-color: #00aaff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>마이 페이지</h1>
+    </div>
+    <div class="profile">
+        <h3>사용자 이름</h3>
+        <p>이메일: user@example.com</p>
+        <p>아이디: user123</p>
+        <p>회원 가입일: 2023-01-15</p>
+    </div>
+    <button class="button" onclick="editProfile()">회원 정보 수정</button>
+    <button class="button" onclick="deleteAccount()">회원 탈퇴</button>
+    <button class="button" onclick="viewRecentBookings()">최근 예매 내역</button>
+    <button class="button">로그아웃</button>
+</div>
+
+<script>
+    function editProfile() {
+        // 사용자 정보 수정 기능 구현
+        window.location.href = 'ChangePassword.html';
+    }
+
+    function deleteAccount() {
+        // 회원 탈퇴 기능 구현
+        if (confirm("정말로 회원 탈퇴하시겠습니까?")) {
+            // 탈퇴 처리 및 로그아웃 로직을 구현하세요.
+
+        }
+    }
+
+    function viewRecentBookings() {
+        // 최근 예매 내역 조회 기능 구현
+        window.location.href = 'RecentBookings.html';
+    }
+</script>
+</body>
+</html>
